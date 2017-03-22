@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from blog import views
+from blog.views import RSSFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home),
-    #url(r'^(?P<my_args>\d+)/$', views.detail, name = 'detail'),
+    url(r'^$', views.home, name = 'home'),
+    url(r'^(?P<id>\d+)/$', views.detail, name = 'detail'),
+    url(r'^archives/$', views.archives, name = 'archives'),
+    url(r'^aboutme/$', views.about_me, name = 'about_me'),
+    url(r'^tag(?P<tag>\w+)/$', views.search_tag, name = 'search_tag'),
+    url(r'^search/$',views.blog_search, name = 'search'),
+    url(r'^feed/$', RSSFeed(), name = "RSS"), 
     #url(r'^test/$', views.test),
 ]
